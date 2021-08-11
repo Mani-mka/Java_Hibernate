@@ -18,8 +18,10 @@ public class HibernateMain {
             SessionFactory factory = con.buildSessionFactory(builder.build());
             Session session = factory.openSession();
             Transaction transaction = session.beginTransaction();
-            Customer c1 = new Customer(1, "Manish", "Oven", 3000);
-            session.save(c1);
+            Customer c1 = session.get(Customer.class, 1);
+            System.out.println("The customer details: " + c1);
+            c1.setCustomerName("Mani_A");
+            c1.setPoints(6000);
             transaction.commit();
             session.close();
         } catch (Exception e) {
